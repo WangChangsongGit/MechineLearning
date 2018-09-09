@@ -49,7 +49,14 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
+options = optimset('GradObj', 'on', 'MaxIter', 400);
 
+initial_theta = zeros(n + 1, 1);
+
+for i = 1:num_labels
+  [theta] = fminunc(@(t)(lrCostFunction(t, X, y == i, lambda)), initial_theta, options);
+  all_theta(i, :) = theta;
+end
 
 
 

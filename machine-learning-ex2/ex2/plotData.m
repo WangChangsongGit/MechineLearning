@@ -12,7 +12,12 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
+pos = find(y==1); neg = find(y == 0);
 
+plot(X(pos, 1), X(pos, 2), 'x', 'LineWidth', 2, 'MarkerSize', 7);
+plot(X(neg, 1), X(neg, 2), 'o', 'MarkerFaceColor', 'y', 'MarkerSize', 7);
+ylabel('Exam 2 score');
+xlabel('Exam 1 score');
 
 
 

@@ -26,7 +26,11 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
+m = size(X, 1);
+mu = 1 / m * sum(X)';
+sigma = std(X)';
+sigma = sigma + xor(xor(sigma, 0), 1);
+X_norm = (X .- mu') ./ sigma';
 
 
 
