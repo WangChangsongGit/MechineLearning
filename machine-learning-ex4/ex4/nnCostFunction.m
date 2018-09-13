@@ -62,6 +62,19 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a1 = [ones(m, 1), X]; % 5000*401
+a2 = sigmoid(a1 * Theta1'); % 5000*25
+a2 = [ones(size(a2, 1), 1), a2]; % 5000*26
+a3 = sigmoid(a2 * Theta2'); % 5000*10
+h = a3;
+y_vector = ones(m,10) .* [1 2 3 4 5 6 7 8 9 10] == y;
+for i=1:num_labels
+    y_vector(:,i) = y==i; %5000x10
+end
+
+Theta1_tmp = [zeros(hidden_layer_size, 1), Theta1(:,2:input_layer_size+1)]; % should not regularize Theta1(:,1)
+Theta2_tmp = [zeros(num_labels, 1), Theta2(:,2:hidden_layer_size+1)]; % should not regularize Theta2(:,1)
+J = -1 / m * sum(sum((y_vector .* log(h) + (1 - y_vector) .* log(1 - h)))) + lambda / (2 * m) * (sum(sum(Theta1_tmp .^ 2)) + sum(sum(Theta2_tmp .^ 2)));
 
 
 
