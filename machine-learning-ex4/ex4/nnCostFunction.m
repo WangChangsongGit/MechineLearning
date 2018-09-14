@@ -68,7 +68,8 @@ a2 = sigmoid(z2); % 5000*25
 a2 = [ones(size(a2, 1), 1), a2]; % 5000*26
 a3 = sigmoid(a2 * Theta2'); % 5000*10
 h = a3;
-y_vector = ones(m,10) .* [1 2 3 4 5 6 7 8 9 10] == y;
+%y_vector = ones(m,10) .* [1 2 3 4 5 6 7 8 9 10] == y;
+y_vector = ones(m,num_labels);
 for i=1:num_labels
     y_vector(:,i) = y==i; %5000x10
 end
@@ -87,14 +88,9 @@ for i=1:m
     Delta1 = Delta1 + delta2' * a1(i, :); %25*401
     Delta2 = Delta2 + delta3' * a2(i, :); %10*401 
 end
-
-m1 = size(Theta1,1);
-m2 = size(Theta2,1);
-Thet1 = [zeros(m1,1) Theta1(:,2:end)];
-Thet2 = [zeros(m2,1) Theta2(:,2:end)];
  
-Theta1_grad = Delta1/m +lambda/m*Thet1; %25x401
-Theta2_grad = Delta2/m +lambda/m*Thet2; %10x26 
+Theta1_grad = Delta1/m +lambda/m*Theta1_tmp; %25x401
+Theta2_grad = Delta2/m +lambda/m*Theta2_tmp; %10x26 
 
 
 
