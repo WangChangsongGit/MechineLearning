@@ -19,7 +19,7 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
-J = 1 / (2 * m) * (X * theta - y)' * (X * theta - y) + lambda / (2 * m) * sum(theta .^2);
+J = 1 / (2 * m) * (X * theta - y)' * (X * theta - y) + lambda / (2 * m) * sum(theta(2:length(theta)) .^2);
 
 theta_tmp = [zeros(1, size(theta,2)); theta(2:size(theta,1),:)];
 grad = 1 / m * X' * (X * theta - y) + lambda / m * theta_tmp;
